@@ -1,40 +1,42 @@
-<h1 align="center">🌐 OrbiUIT</h1>
-
-<p align="center">
-  <strong>A Knowledge Sharing & Social Platform for UIT Students</strong><br/>
-  Empowering learning, connection, and guidance at the University of Information Technology.
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/frontend-react-blue?logo=react" />
-  <img src="https://img.shields.io/badge/ui-shadcn--ui-orange" />
-  <img src="https://img.shields.io/badge/backend-springboot-green?logo=spring" />
-  <img src="https://img.shields.io/badge/deploy-vercel%20%7C%20render-black" />
-</p>
+<div align="center">
+  <img src="https://img.icons8.com/color/96/school-building.png" width="80" />
+  <h1>🌐 OrbiUIT</h1>
+  <p><b>UIT Students' Social & Academic Hub</b></p>
+  <p>Knowledge sharing, social media features, and major guidance — all in one place.</p>
+</div>
 
 ---
 
-## ✨ Features
+## 📌 About the Project
 
-- 📚 **Knowledge Sharing** – Share tutorials, notes, and educational resources.
-- 💬 **UIT Social Feed** – Discuss ideas, ask questions, and build community.
-- 🧠 **AI-Powered Major Recommendation** – Smart suggestions based on your interests and profile.
-- 📌 **Future Tools** – Lost & Found, Job Portal, Event Board (coming soon!)
+🎓 **OrbiUIT** is a web platform built for the students of the **University of Information Technology (UIT)**.  
+It blends social interaction with academic support to foster a helpful and connected student community.
 
 ---
 
-## 🛠 Tech Stack
+## 🚀 Features at a Glance
 
-| Layer        | Tech                                                                 |
-|--------------|----------------------------------------------------------------------|
-| **Frontend** | [React](https://react.dev/), [ShadCN UI](https://ui.shadcn.dev/), [Vercel](https://vercel.com/) |
-| **Backend**  | [Spring Boot](https://spring.io/projects/spring-boot), [Docker](https://www.docker.com/), [Render](https://render.com/) |
+| 🌟 Feature                  | 💡 Description                                                                 |
+|----------------------------|-------------------------------------------------------------------------------|
+| 📚 Knowledge Sharing       | Upload and explore academic content, tutorials, and guides.                  |
+| 💬 UIT Social Feed         | Post updates, ask questions, and interact with other students.               |
+| 🧭 Major Recommendation     | AI-powered system to help students choose the right major.                   |
+| 🔍 Lost & Found (Planned)  | Report or find lost belongings easily within the UIT community.              |
+| 💼 Job & Events Board      | Share internships, part-time jobs, and events for students. *(Coming soon)* |
+
+---
+
+## 🛠️ Tech Stack
+
+### 🖼️ Frontend
+- ⚛️ [**React**](https://reactjs.org/)
+- 🎨 [**ShadCN UI**](https://ui.shadcn.dev/)
+- ▲ [**Vercel**](https://vercel.com/) – for deployment
+
+### ⚙️ Backend
+- ☕ [**Spring Boot**](https://spring.io/projects/spring-boot)
+- 🐳 [**Docker**](https://www.docker.com/)
+- 🌐 [**Render**](https://render.com/) – for backend hosting
 
 ---
 
-## 🚀 Deployment Overview
-
-- **Client:** Deployed via **Vercel** for fast global delivery.
-- **Server:** Containerized with **Docker**, deployed on **Render**.
-
----
