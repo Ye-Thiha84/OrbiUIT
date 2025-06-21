@@ -1,36 +1,40 @@
-# 🌐 OrbiUIT
+<h1 align="center">🌐 OrbiUIT</h1>
 
-**OrbiUIT** is a knowledge-sharing platform tailored specifically for students at the **University of Information Technology (UIT)**. The platform combines social media features with academic and career support tools such as major recommendations and community discussions, aiming to create a unified digital space for UIT students to grow, connect, and succeed.
+<p align="center">
+  <strong>A Knowledge Sharing & Social Platform for UIT Students</strong><br/>
+  Empowering learning, connection, and guidance at the University of Information Technology.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/frontend-react-blue?logo=react" />
+  <img src="https://img.shields.io/badge/ui-shadcn--ui-orange" />
+  <img src="https://img.shields.io/badge/backend-springboot-green?logo=spring" />
+  <img src="https://img.shields.io/badge/deploy-vercel%20%7C%20render-black" />
+</p>
 
 ---
 
 ## ✨ Features
 
-- 📚 **Knowledge Sharing** – Post and discover academic resources, tutorials, and guides.
-- 💬 **UIT Social Feed** – Engage in discussions, share updates, or ask questions.
-- 🧭 **Major Recommendation System** – AI-assisted tool to help students choose the right major based on interests and strengths.
-- 🔍 **Lost & Found, Events, Job Board** *(Planned)* – Community-driven tools for everyday student life.
+- 📚 **Knowledge Sharing** – Share tutorials, notes, and educational resources.
+- 💬 **UIT Social Feed** – Discuss ideas, ask questions, and build community.
+- 🧠 **AI-Powered Major Recommendation** – Smart suggestions based on your interests and profile.
+- 📌 **Future Tools** – Lost & Found, Job Portal, Event Board (coming soon!)
 
 ---
 
 ## 🛠 Tech Stack
 
-### Frontend
-- [React](https://react.dev/)
-- [ShadCN UI](https://ui.shadcn.dev/) – For beautiful and accessible UI components
-- [Vercel](https://vercel.com/) – For fast and secure deployment
-
-### Backend
-- [Spring Boot](https://spring.io/projects/spring-boot) – Robust Java backend framework
-- [Docker](https://www.docker.com/) – Containerization for backend services
-- [Render](https://render.com/) – Deployment of Spring Boot services
+| Layer        | Tech                                                                 |
+|--------------|----------------------------------------------------------------------|
+| **Frontend** | [React](https://react.dev/), [ShadCN UI](https://ui.shadcn.dev/), [Vercel](https://vercel.com/) |
+| **Backend**  | [Spring Boot](https://spring.io/projects/spring-boot), [Docker](https://www.docker.com/), [Render](https://render.com/) |
 
 ---
 
 ## 🚀 Deployment Overview
 
-- **Frontend:** Deployed on [Vercel](https://vercel.com/)
-- **Backend:** Packaged with Docker and deployed via [Render](https://render.com/)
+- **Client:** Deployed via **Vercel** for fast global delivery.
+- **Server:** Containerized with **Docker**, deployed on **Render**.
 
 ---
-
