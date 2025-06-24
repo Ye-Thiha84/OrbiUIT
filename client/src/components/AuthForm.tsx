@@ -1,10 +1,12 @@
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight } from "lucide-react";
 import MicrosoftAuthButton from "./MicrosoftAuthButton";
+import { useAuth } from "@/context/AuthProvider";
 
 interface AuthFormProps {
   isLogin: boolean;
@@ -12,20 +14,20 @@ interface AuthFormProps {
 }
 
 const AuthForm = ({ isLogin, toggleMode }: AuthFormProps) => {
+  const { formData, setFormData, submitLogin, submitSignup } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    if (isLogin) {
+      await submitLogin();
+    } else {
+      await submitSignup();
+    }
   };
 
   return (
@@ -35,7 +37,9 @@ const AuthForm = ({ isLogin, toggleMode }: AuthFormProps) => {
           {isLogin ? "Welcome back" : "Create account"}
         </h2>
         <p className="text-gray-600">
-          {isLogin ? "Sign in to your OrbiUIT account" : "Join OrbiUIT and start your journey"}
+          {isLogin
+            ? "Sign in to your OrbiUIT account"
+            : "Join OrbiUIT and start your journey"}
         </p>
       </div>
 
@@ -119,13 +123,19 @@ const AuthForm = ({ isLogin, toggleMode }: AuthFormProps) => {
                 />
                 <span className="text-sm text-black">Remember me</span>
               </label>
-              <button type="button" className="text-sm text-black hover:text-gray-600 font-medium">
+              <button
+                type="button"
+                className="text-sm text-black hover:text-gray-600 font-medium"
+              >
                 Forgot password?
               </button>
             </div>
           )}
 
-          <Button type="submit" className="w-full h-12 bg-black hover:bg-gray-800 text-white">
+          <Button
+            type="submit"
+            className="w-full h-12 bg-black hover:bg-gray-800 text-white"
+          >
             {isLogin ? "Sign In" : "Create Account"}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
@@ -146,8 +156,14 @@ const AuthForm = ({ isLogin, toggleMode }: AuthFormProps) => {
 
       <div className="text-center text-xs text-gray-500">
         By continuing, you agree to our{" "}
-        <a href="#" className="text-black hover:text-gray-600">Terms of Service</a> and{" "}
-        <a href="#" className="text-black hover:text-gray-600">Privacy Policy</a>.
+        <a href="#" className="text-black hover:text-gray-600">
+          Terms of Service
+        </a>{" "}
+        and{" "}
+        <a href="#" className="text-black hover:text-gray-600">
+          Privacy Policy
+        </a>
+        .
       </div>
     </div>
   );
