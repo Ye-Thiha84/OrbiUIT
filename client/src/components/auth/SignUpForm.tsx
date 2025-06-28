@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -47,15 +47,41 @@ const SignupForm = () => {
       return;
     }
 
-    // Simulate account creation
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const response = await fetch("http://localhost:9090/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          studentId: formData.studentId,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+      console.log(formData);
+
+      if (!response.ok) {
+        throw new Error("Signup failed");
+      }
+
       toast({
         title: "Account Created!",
-        description: "Welcome to OrbiUIT! Please check your email to verify your account.",
+        description: "Welcome to OrbitUIT! Please check your email to verify your account.",
       });
-    }, 2000);
+    } catch (error) {
+      const err = error as Error;
+      toast({
+        title: "Error",
+        description: "Failed to sign up: " + err.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+
 
   const handleOutlookSignup = () => {
     toast({
@@ -75,8 +101,7 @@ const SignupForm = () => {
       <Button
         onClick={handleOutlookSignup}
         variant="outline"
-        className="w-full mb-6 h-12 border-2 border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-all duration-200"
-      >
+        className="w-full mb-6 h-12 border-2 border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-all duration-200">
         <div className="flex items-center justify-center space-x-3">
           <div className="w-5 h-5 bg-gradient-to-r from-gray-700 to-black rounded flex items-center justify-center">
             <Mail className="w-3 h-3 text-white" />

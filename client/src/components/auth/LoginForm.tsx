@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,26 +16,65 @@ const LoginForm = ({ onForgotPassword }: LoginFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //
+  //   // Simulate authentication
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //     if (email && password) {
+  //       toast({
+  //         title: "Welcome back!",
+  //         description: "Successfully signed in to OrbitUIT",
+  //       });
+  //     } else {
+  //       toast({
+  //         title: "Error",
+  //         description: "Please fill in all fields",
+  //         variant: "destructive",
+  //       });
+  //     }
+  //   }, 1500);
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate authentication
-    setTimeout(() => {
-      setIsLoading(false);
-      if (email && password) {
+    try {
+      const response = await fetch('http://localhost:9090/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      console.log(email, password);
+
+      const data = await response.text();
+
+      if (response.ok) {
         toast({
-          title: "Welcome back!",
-          description: "Successfully signed in to OrbiUIT",
+          title: "Success",
+          description: data,
         });
       } else {
         toast({
-          title: "Error",
-          description: "Please fill in all fields",
+          title: "Login Failed",
+          description: data,
           variant: "destructive",
         });
       }
-    }, 1500);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleOutlookLogin = () => {

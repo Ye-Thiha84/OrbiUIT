@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import LoginForm from '../components/auth/LoginForm';
 import SignupForm from '../components/auth/SignUpForm';
 import ForgotPasswordForm from '../components/auth/ForgotPasswordForm';
@@ -9,11 +9,26 @@ type AuthMode = 'login' | 'signup' | 'forgot';
 const Auth = () => {
   const [authMode, setAuthMode] = useState<AuthMode>('login');
 
+  // ✅ Add this state to store users
+  // const [users, setUsers] = useState<any[]>([]);
+
+  // ✅ Fetch users when the component mounts
+  // useEffect(() => {
+  //   fetch("/api/users")
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log("Fetched users:", data);
+  //         // setUsers(data);
+  //       })
+  //       .catch((err) => console.error("Failed to fetch users:", err));
+  // }, []);
+  
   const handleAuthModeChange = (mode: AuthMode) => {
     setAuthMode(mode);
   };
 
   return (
+      
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       {/* Header */}
       <div className="absolute top-0 left-0 right-0 p-6 z-10">
@@ -71,6 +86,16 @@ const Auth = () => {
         {/* Right Side - Auth Forms */}
         <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
           <div className="w-full max-w-md">
+            {/* Just for debug display */}
+            {/*<div className="bg-gray-100 p-4 rounded mt-4">*/}
+            {/*  <h2 className="text-sm font-semibold mb-2">Fetched Users</h2>*/}
+            {/*  <ul className="text-xs text-gray-700 space-y-1">*/}
+            {/*    {users.map((user, index) => (*/}
+            {/*        <li key={index}>{user.name}</li>*/}
+            {/*    ))}*/}
+            {/*  </ul>*/}
+            {/*</div>*/}
+
             <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
               {/* Auth Mode Toggle */}
               {authMode !== 'forgot' && (
