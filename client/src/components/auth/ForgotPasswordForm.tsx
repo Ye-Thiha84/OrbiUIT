@@ -1,5 +1,5 @@
-
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,29 +10,43 @@ interface ForgotPasswordFormProps {
   onBackToLogin: () => void;
 }
 
-const ForgotPasswordForm = ({ onBackToLogin }: ForgotPasswordFormProps) => {
+const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }) => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
+  const [errors, setErrors] = useState<{ email?: string }>({});
+
+  const validateForm = () => {
+    const newErrors: { email?: string } = {};
+    if (!email) newErrors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Invalid email format';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    // Simulate sending reset email
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsEmailSent(true);
-      toast({
-        title: "Reset Email Sent!",
-        description: "Check your inbox for password reset instructions.",
-      });
-    }, 1500);
+    if (validateForm()) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsEmailSent(true);
+        toast({
+          title: "Reset Email Sent!",
+          description: "Check your inbox for password reset instructions.",
+        });
+      }, 1500);
+    }
   };
 
   if (isEmailSent) {
     return (
-      <div className="text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="text-center"
+      >
         <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <Mail className="w-8 h-8 text-gray-700" />
         </div>
@@ -57,6 +71,7 @@ const ForgotPasswordForm = ({ onBackToLogin }: ForgotPasswordFormProps) => {
               onClick={() => {
                 setIsEmailSent(false);
                 setEmail('');
+                setErrors({});
               }}
               className="text-gray-700 hover:text-black font-medium"
             >
@@ -64,12 +79,17 @@ const ForgotPasswordForm = ({ onBackToLogin }: ForgotPasswordFormProps) => {
             </button>
           </p>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      transition={{ duration: 0.3 }}
+    >
       <div className="flex items-center mb-6">
         <button
           onClick={onBackToLogin}
@@ -92,24 +112,34 @@ const ForgotPasswordForm = ({ onBackToLogin }: ForgotPasswordFormProps) => {
           <Label htmlFor="reset-email" className="text-sm font-medium text-gray-700">
             Email Address
           </Label>
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <Input
-              id="reset-email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your UIT email"
-              className="pl-10 h-12 border-gray-200 focus:border-gray-500 focus:ring-gray-500"
-              required
-            />
-          </div>
+          <motion.div
+            className={`relative ${errors.email ? 'animate-shake' : ''}`}
+            animate={errors.email ? { x: [0, -5, 5, -5, 5, 0] } : {}}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
+                id="reset-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your UIT email"
+                className={`pl-10 h-12 border ${
+                  errors.email ? 'border-red-500 ring-2 ring-red-300' : 'border-gray-200'
+                } focus:border-gray-500 focus:ring-gray-500`}
+              />
+            </div>
+            {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+          </motion.div>
         </div>
 
-        <Button
+        <motion.button
           type="submit"
           disabled={isLoading}
           className="w-full h-12 bg-gradient-to-r from-gray-800 to-black hover:from-gray-900 hover:to-gray-800 text-white font-medium rounded-lg transition-all duration-200"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           {isLoading ? (
             <div className="flex items-center space-x-2">
@@ -119,7 +149,7 @@ const ForgotPasswordForm = ({ onBackToLogin }: ForgotPasswordFormProps) => {
           ) : (
             'Send Reset Instructions'
           )}
-        </Button>
+        </motion.button>
       </form>
 
       <div className="mt-6 text-center">
@@ -133,7 +163,7 @@ const ForgotPasswordForm = ({ onBackToLogin }: ForgotPasswordFormProps) => {
           </button>
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

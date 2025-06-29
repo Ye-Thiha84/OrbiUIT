@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import LoginForm from '../components/auth/LoginForm';
 import SignupForm from '../components/auth/SignUpForm';
 import ForgotPasswordForm from '../components/auth/ForgotPasswordForm';
@@ -24,17 +25,39 @@ const Auth = () => {
 
       <div className="flex min-h-screen">
         {/* Left Side - Branding & Info */}
-        <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
+        <motion.div
+          className="hidden lg:flex lg:w-1/2 relative overflow-hidden"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800"></div>
           <div className="absolute inset-0 bg-black/20"></div>
           
-          {/* Decorative Elements */}
-          <div className="absolute top-20 left-20 w-32 h-32 bg-white/5 rounded-full blur-xl"></div>
-          <div className="absolute bottom-40 right-20 w-24 h-24 bg-gray-300/10 rounded-full blur-lg"></div>
-          <div className="absolute top-1/2 left-10 w-16 h-16 bg-gray-400/20 rounded-full blur-md"></div>
+          {/* Decorative Elements with Animation */}
+          <motion.div
+            className="absolute top-20 left-20 w-32 h-32 bg-white/5 rounded-full blur-xl"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+            transition={{ repeat: Infinity, duration: 3 }}
+          ></motion.div>
+          <motion.div
+            className="absolute bottom-40 right-20 w-24 h-24 bg-gray-300/10 rounded-full blur-lg"
+            animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ repeat: Infinity, duration: 4 }}
+          ></motion.div>
+          <motion.div
+            className="absolute top-1/2 left-10 w-16 h-16 bg-gray-400/20 rounded-full blur-md"
+            animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }}
+            transition={{ repeat: Infinity, duration: 5 }}
+          ></motion.div>
           
           <div className="relative z-10 flex flex-col items-center px-12 text-white min-h-screen w-full">
-            <div className="text-center max-w-lg pt-32">
+            <motion.div
+              className="text-center max-w-lg pt-32"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
               <h2 className="text-4xl font-bold mb-10 leading-tight">
                 Centralized Knowledge
                 <br />
@@ -45,32 +68,37 @@ const Auth = () => {
               </p>
               
               <div className="space-y-8">
-                <div className="flex items-center justify-center space-x-4">
+                <motion.div className="flex items-center justify-center space-x-4" whileHover={{ x: 5 }}>
                   <div className="w-8 h-8 bg-gray-700/50 rounded-lg flex items-center justify-center">
                     <Users className="w-4 h-4" />
                   </div>
                   <span className="text-gray-200 text-lg">Connect with students across all departments</span>
-                </div>
-                <div className="flex items-center justify-center space-x-4">
+                </motion.div>
+                <motion.div className="flex items-center justify-center space-x-4" whileHover={{ x: 5 }}>
                   <div className="w-8 h-8 bg-gray-700/50 rounded-lg flex items-center justify-center">
                     <BookOpen className="w-4 h-4" />
                   </div>
                   <span className="text-gray-200 text-lg">Access shared study materials and resources</span>
-                </div>
-                <div className="flex items-center justify-center space-x-4">
+                </motion.div>
+                <motion.div className="flex items-center justify-center space-x-4" whileHover={{ x: 5 }}>
                   <div className="w-8 h-8 bg-gray-700/50 rounded-lg flex items-center justify-center">
                     <Share2 className="w-4 h-4" />
                   </div>
                   <span className="text-gray-200 text-lg">Share knowledge and collaborate effectively</span>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Side - Auth Forms */}
         <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
-          <div className="w-full max-w-md">
+          <motion.div
+            className="w-full max-w-md"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
               {/* Auth Mode Toggle */}
               {authMode !== 'forgot' && (
@@ -79,7 +107,7 @@ const Auth = () => {
                     onClick={() => handleAuthModeChange('login')}
                     className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 ${
                       authMode === 'login'
-                        ? 'bg-black text-white shadow-sm'
+                        ? 'bg-gradient-to-r from-gray-800 to-black text-white shadow-sm'
                         : 'text-gray-600 hover:text-gray-900'
                     }`}
                     aria-current={authMode === 'login' ? 'true' : 'false'}
@@ -88,9 +116,9 @@ const Auth = () => {
                   </button>
                   <button
                     onClick={() => handleAuthModeChange('signup')}
-                    className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    className={`flex-1 py-2 px-4 text-sm font-medium rounded-lg transition-all duration-200 ${
                       authMode === 'signup'
-                        ? 'bg-black text-white shadow-sm'
+                        ? 'bg-gradient-to-r from-gray-800 to-black text-white shadow-sm'
                         : 'text-gray-600 hover:text-gray-900'
                     }`}
                     aria-current={authMode === 'signup' ? 'true' : 'false'}
@@ -101,15 +129,23 @@ const Auth = () => {
               )}
 
               {/* Form Content */}
-              <div className="transition-all duration-300">
-                {authMode === 'login' && (
-                  <LoginForm onForgotPassword={() => setAuthMode('forgot')} />
-                )}
-                {authMode === 'signup' && <SignupForm />}
-                {authMode === 'forgot' && (
-                  <ForgotPasswordForm onBackToLogin={() => setAuthMode('login')} />
-                )}
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={authMode}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {authMode === 'login' && (
+                    <LoginForm onForgotPassword={() => handleAuthModeChange('forgot')} />
+                  )}
+                  {authMode === 'signup' && <SignupForm />}
+                  {authMode === 'forgot' && (
+                    <ForgotPasswordForm onBackToLogin={() => handleAuthModeChange('login')} />
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Footer */}
@@ -118,7 +154,7 @@ const Auth = () => {
                 By continuing, you agree to OrbiUIT's Terms of Service and Privacy Policy
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

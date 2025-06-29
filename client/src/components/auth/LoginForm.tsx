@@ -1,5 +1,5 @@
-
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,32 +10,42 @@ interface LoginFormProps {
   onForgotPassword: () => void;
 }
 
-const LoginForm = ({ onForgotPassword }: LoginFormProps) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+
+  const validateForm = () => {
+    const newErrors: { email?: string; password?: string } = {};
+    if (!email) newErrors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Invalid email format';
+    if (!password) newErrors.password = 'Password is required';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    // Simulate authentication
-    setTimeout(() => {
-      setIsLoading(false);
-      if (email && password) {
-        toast({
-          title: "Welcome back!",
-          description: "Successfully signed in to OrbiUIT",
-        });
-      } else {
-        toast({
-          title: "Error",
-          description: "Please fill in all fields",
-          variant: "destructive",
-        });
-      }
-    }, 1500);
+    if (validateForm()) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+        if (email && password) {
+          toast({
+            title: "Welcome back!",
+            description: "Successfully signed in to OrbiUIT",
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: "Please fill in all fields",
+            variant: "destructive",
+          });
+        }
+      }, 1500);
+    }
   };
 
   const handleOutlookLogin = () => {
@@ -46,13 +56,17 @@ const LoginForm = ({ onForgotPassword }: LoginFormProps) => {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      transition={{ duration: 0.3 }}
+    >
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h2>
         <p className="text-gray-600">Sign in to access your OrbiUIT account</p>
       </div>
 
-      {/* Microsoft Outlook Login */}
       <Button
         onClick={handleOutlookLogin}
         variant="outline"
@@ -80,43 +94,59 @@ const LoginForm = ({ onForgotPassword }: LoginFormProps) => {
           <Label htmlFor="email" className="text-sm font-medium text-gray-700">
             Email Address
           </Label>
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your UIT email"
-              className="pl-10 h-12 border-gray-200 focus:border-gray-500 focus:ring-gray-500"
-              required
-            />
-          </div>
+          <motion.div
+            className={`relative ${errors.email ? 'animate-shake' : ''}`}
+            animate={errors.email ? { x: [0, -5, 5, -5, 5, 0] } : {}}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your UIT email"
+                className={`pl-10 h-12 border ${
+                  errors.email ? 'border-red-500 ring-2 ring-red-300' : 'border-gray-200'
+                } focus:border-gray-500 focus:ring-gray-500`}
+              />
+            </div>
+            {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+          </motion.div>
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="password" className="text-sm font-medium text-gray-700">
             Password
           </Label>
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <Input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              className="pl-10 pr-10 h-12 border-gray-200 focus:border-gray-500 focus:ring-gray-500"
-              required
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-            >
-              <Eye className="w-4 h-4" />
-            </button>
-          </div>
+          <motion.div
+            className={`relative ${errors.password ? 'animate-shake' : ''}`}
+            animate={errors.password ? { x: [0, -5, 5, -5, 5, 0] } : {}}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                className={`pl-10 pr-10 h-12 border ${
+                  errors.password ? 'border-red-500 ring-2 ring-red-300' : 'border-gray-200'
+                } focus:border-gray-500 focus:ring-gray-500`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                <Eye className="w-4 h-4" />
+              </button>
+            </div>
+            {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
+          </motion.div>
         </div>
 
         <div className="flex items-center justify-between">
@@ -133,10 +163,12 @@ const LoginForm = ({ onForgotPassword }: LoginFormProps) => {
           </button>
         </div>
 
-        <Button
+        <motion.button
           type="submit"
           disabled={isLoading}
           className="w-full h-12 bg-gradient-to-r from-gray-800 to-black hover:from-gray-900 hover:to-gray-800 text-white font-medium rounded-lg transition-all duration-200"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           {isLoading ? (
             <div className="flex items-center space-x-2">
@@ -146,9 +178,9 @@ const LoginForm = ({ onForgotPassword }: LoginFormProps) => {
           ) : (
             'Sign In'
           )}
-        </Button>
+        </motion.button>
       </form>
-    </div>
+    </motion.div>
   );
 };
 
