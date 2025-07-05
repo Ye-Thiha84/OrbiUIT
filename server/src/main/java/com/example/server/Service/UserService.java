@@ -2,17 +2,67 @@ package com.example.server.Service;
 
 import com.example.server.Model.User;
 import com.example.server.Repository.UserRepository;
+<<<<<<< HEAD
+import com.example.server.dto.UserDTO;
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+>>>>>>> c74acc87be48d1466b3f2b36bad2b0074eac38cf
 
 @Service
 public class UserService {
     
+<<<<<<< HEAD
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public String registerUser(UserDTO userDTO) {
+        if (userRepository.existsByEmail(userDTO.getEmail())) {
+            return "Email already exists";
+        }
+
+        User user = new User();
+        user.setName(userDTO.getFullName());
+        user.setStudentId(userDTO.getStudentId());
+        user.setEmail(userDTO.getEmail());
+        String hashedPassword = BCrypt.hashpw(userDTO.getPassword(), BCrypt.gensalt());
+        user.setPassword(hashedPassword); // 🚨 In real apps, hash this!
+        
+        userRepository.save(user);
+        return "Signup successful";
+    }
+
+    public boolean loginUser(UserDTO userDTO) {
+        Optional<User> optionalUser = userRepository.findByEmail(userDTO.getEmail());
+        System.out.println("Data from db to check: " + optionalUser);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return BCrypt.checkpw(userDTO.getPassword(), user.getPassword()); // compare plaintext vs hashed
+        }
+
+        return false; // email not found
+    }
+
+
+
+
+
+
+=======
     @Autowired
     private UserRepository userRepository;
     
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+>>>>>>> c74acc87be48d1466b3f2b36bad2b0074eac38cf
 }
