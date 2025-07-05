@@ -1,38 +1,22 @@
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react'
-// import tailwindcss from '@tailwindcss/vite'
-// import path from "path"
-//
-// export default defineConfig({
-//   plugins: [react(), tailwindcss()],
-//   resolve: {
-//     alias: {
-//       "@": path.resolve(__dirname, "./src"),
-//     },
-//   },
-// })
-//
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import path from "path";
+import { componentTagger } from "lovable-tagger";
 
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-import path from "path"
-
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => ({
+  server: {
+    host: "::",
+    port: 8080,
+  },
+  plugins: [
+    react(),
+    mode === 'development' &&
+    componentTagger(),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:9090", // Spring Boot backend
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
-})
-
+}));
