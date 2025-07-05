@@ -2,15 +2,22 @@ package com.example.server.Service;
 
 import com.example.server.Model.User;
 import com.example.server.Repository.UserRepository;
+<<<<<<< HEAD
 import com.example.server.dto.UserDTO;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+>>>>>>> c74acc87be48d1466b3f2b36bad2b0074eac38cf
 
 @Service
 public class UserService {
     
+<<<<<<< HEAD
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -50,4 +57,12 @@ public class UserService {
 
 
 
+=======
+    @Autowired
+    private UserRepository userRepository;
+    
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+>>>>>>> c74acc87be48d1466b3f2b36bad2b0074eac38cf
 }
