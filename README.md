@@ -22,7 +22,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/🚀_Status-Live_&_Ready-00D084?style=for-the-badge&labelColor=1a1a1a" />
-  <img src="https://img.shields.io/badge/🎯_Version-2.0-FF6B6B?style=for-the-badge&labelColor=1a1a1a" />
+  <img src="https://img.shields.io/badge/🎯_Version-1.0-FF6B6B?style=for-the-badge&labelColor=1a1a1a" />
   <img src="https://img.shields.io/badge/💫_Students-1000+-FFD93D?style=for-the-badge&labelColor=1a1a1a" />
 </p>
 
@@ -49,12 +49,12 @@
 <td width="50%">
 
 ```ascii
-    🌐 SOCIAL HUB
+    🧭 CAREER GUIDANCE
     ┌─────────────────┐
-    │   💬 Chat       │
-    │   📱 Posts      │
-    │   🤝 Network    │
-    │   🎯 Events     │
+    │   🎯 Majors     │
+    │   🛤️ Roadmaps   │
+    │   🧠 AI Guide   │
+    │   💡 Insights   │
     └─────────────────┘
 ```
 
@@ -62,12 +62,12 @@
 <td width="50%">
 
 ```ascii
-    📚 KNOWLEDGE BASE
+    🌐 SOCIAL NETWORK
     ┌─────────────────┐
-    │   📖 Tutorials  │
-    │   📝 Notes      │
-    │   🧠 AI Guide   │
-    │   💡 Resources  │
+    │   🔍 Lost/Found │
+    │   📰 News       │
+    │   💼 Jobs       │
+    │   🎉 Events     │
     └─────────────────┘
 ```
 
@@ -78,15 +78,15 @@
 
 ---
 
-## ⚡ Features That'll Blow Your Mind
+## ⚡ What We Offer
 
 <div align="center">
 
-| 🎯 **CORE FEATURES** | 🚀 **COMING SOON** |
+| 🎯 **CORE FEATURES** | 🌐 **SOCIAL NETWORK** |
 |:---:|:---:|
-| <img src="https://img.shields.io/badge/📚_Knowledge_Sharing-Active-00D084?style=flat-square&labelColor=1a1a1a" /> | <img src="https://img.shields.io/badge/🔍_Lost_&_Found-Soon-FF6B6B?style=flat-square&labelColor=1a1a1a" /> |
-| <img src="https://img.shields.io/badge/💬_Social_Feed-Active-00D084?style=flat-square&labelColor=1a1a1a" /> | <img src="https://img.shields.io/badge/💼_Job_Board-Soon-FF6B6B?style=flat-square&labelColor=1a1a1a" /> |
-| <img src="https://img.shields.io/badge/🧭_Major_Recommendation-Active-00D084?style=flat-square&labelColor=1a1a1a" /> | <img src="https://img.shields.io/badge/🎉_Events_Hub-Soon-FF6B6B?style=flat-square&labelColor=1a1a1a" /> |
+| <img src="https://img.shields.io/badge/🧭_Major_Recommendation-Active-00D084?style=flat-square&labelColor=1a1a1a" /> | <img src="https://img.shields.io/badge/🔍_Lost_&_Found-Active-00D084?style=flat-square&labelColor=1a1a1a" /> |
+| <img src="https://img.shields.io/badge/🛤️_Career_Roadmap-Active-00D084?style=flat-square&labelColor=1a1a1a" /> | <img src="https://img.shields.io/badge/📰_News_&_Events-Active-00D084?style=flat-square&labelColor=1a1a1a" /> |
+| <img src="https://img.shields.io/badge/🧠_AI_Guidance-Active-00D084?style=flat-square&labelColor=1a1a1a" /> | <img src="https://img.shields.io/badge/💼_Job_Portal-Active-00D084?style=flat-square&labelColor=1a1a1a" /> |
 
 </div>
 
@@ -95,16 +95,20 @@
 ```mermaid
 graph TD
     A[🎓 UIT Student] --> B{Join OrbiUIT}
-    B --> C[📚 Share Knowledge]
-    B --> D[💬 Connect Socially]
-    B --> E[🧭 Get AI Guidance]
-    C --> F[🌟 Become Expert]
-    D --> G[🤝 Build Network]
-    E --> H[🎯 Find Your Path]
-    F --> I[🚀 Lead Community]
-    G --> I
-    H --> I
-    I --> J[🏆 UIT Success Story]
+    B --> C[🧭 Get Major Recommendation]
+    B --> D[🌐 Connect with Community]
+    B --> E[🛤️ Generate Career Roadmap]
+    C --> F[🎯 Find Perfect Major]
+    D --> G[🔍 Use Lost & Found]
+    D --> H[💼 Browse Job Portal]
+    D --> I[📰 Stay Updated with News]
+    E --> J[📈 Follow Career Path]
+    F --> K[🏆 Academic Success]
+    G --> K
+    H --> K
+    I --> K
+    J --> K
+    K --> L[🌟 UIT Graduate Ready for Future]
 ```
 
 ---
