@@ -148,14 +148,6 @@ npm start
 
 ---
 
-## 📊 **Platform Stats**
-
-<div align="center">
-
-<img src="https://github-readme-stats.vercel.app/api?username=orbiuit&show_icons=true&theme=radical&hide_border=true&bg_color=0D1117&icon_color=6C63FF&title_color=FF6B6B&text_color=FFF" width="48%"/>
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=orbiuit&theme=radical&hide_border=true&background=0D1117&stroke=6C63FF&ring=FF6B6B&fire=FFD93D&currStreakLabel=FFF" width="48%"/>
-
-</div>
 
 ---
 
