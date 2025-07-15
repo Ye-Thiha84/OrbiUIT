@@ -10,19 +10,6 @@ const Auth = () => {
   const [authMode, setAuthMode] = useState<AuthMode>('login');
 
   // ✅ Add this state to store users
-  // const [users, setUsers] = useState<any[]>([]);
-
-  // ✅ Fetch users when the component mounts
-  // useEffect(() => {
-  //   fetch("/api/users")
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log("Fetched users:", data);
-  //         // setUsers(data);
-  //       })
-  //       .catch((err) => console.error("Failed to fetch users:", err));
-  // }, []);
-  
   const handleAuthModeChange = (mode: AuthMode) => {
     setAuthMode(mode);
   };

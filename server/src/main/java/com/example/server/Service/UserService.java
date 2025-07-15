@@ -4,8 +4,11 @@ import com.example.server.Model.User;
 import com.example.server.Repository.UserRepository;
 import com.example.server.dto.UserDTO;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,8 +44,21 @@ public class UserService {
             User user = optionalUser.get();
             return BCrypt.checkpw(userDTO.getPassword(), user.getPassword()); // compare plaintext vs hashed
         }
-
         return false; // email not found
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public Optional<User> searchUser(String search) {
+        return userRepository.findByEmail(search);
+    }
+    
+    public void resetPassword(String email,String password) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Email not found"));
+        user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
+        userRepository.save(user);
     }
 
 
